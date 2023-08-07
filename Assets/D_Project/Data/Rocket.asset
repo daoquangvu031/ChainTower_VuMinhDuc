@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47a9835e1fd5f3548bccbf34f85c1c6a, type: 3}
-  m_Name: Laser
+  m_Name: Rocket
   m_EditorClassIdentifier: 
-  TurrretType: 0
-  Sprite: {fileID: 21300000, guid: 62016a6b47be7504f97f996e003a7101, type: 3}
-  Prefab: {fileID: 5955566036861796321, guid: 6e5f2d07448bec44ca3c85f2e1c2dd59, type: 3}
-  Coin: 75
+  TurrretType: 1
+  Sprite: {fileID: 21300000, guid: ad214335f71e3a543932a22eb89dc88a, type: 3}
+  Prefab: {fileID: 4586448526431114124, guid: 6abd16077a5df5d478269ab9a1ba660f, type: 3}
+  Coin: 100

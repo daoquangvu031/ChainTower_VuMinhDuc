@@ -10,4 +10,7 @@ public class TurretData : ScriptableObject
     public Sprite Sprite;
 
     public TurretBase Prefab;
+
+    public int Coin;
+
 }

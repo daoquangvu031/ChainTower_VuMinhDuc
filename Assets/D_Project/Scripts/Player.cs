@@ -113,7 +113,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void UpdateCoinText()
+    public void UpdateCoinText()
     {
         coin.text = currentCoins.ToString();
     }

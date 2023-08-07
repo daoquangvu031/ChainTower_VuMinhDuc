@@ -5,20 +5,14 @@ using UnityEngine.UIElements;
 
 public class TurretMachineGun : TurretBase
 {
-    private BulletPool bulletPool;
+    public GameObject targetBot;
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
     public float attackInterval = 1.0f;
     public ParticleSystem swordParticleSystem;
 
-    public GameObject targetBot;
     private float attackTimer = 0.0f;
 
-
-    public void Start()
-    {
-        bulletPool = FindObjectOfType<BulletPool>();
-    }
 
     private void Update()
     {
@@ -26,7 +20,7 @@ public class TurretMachineGun : TurretBase
         {
             if (attackTimer <= 0)
             {
-                AttackBot(targetBot);
+                AttackBot(targetBot);   
                 attackTimer = attackInterval;
             }
             else
@@ -46,7 +40,7 @@ public class TurretMachineGun : TurretBase
 
             if (bulletPrefab != null && bulletSpawnPoint != null)
             {
-                GameObject bullet = bulletPool.GetBulletFromPool(); // Lấy đạn từ Bullet Pool
+                GameObject bullet = Pool.GetBulletFromPool(); // Lấy đạn từ Bullet Pool
                 if (bullet != null)
                 {
                     bullet.transform.position = bulletSpawnPoint.position;
@@ -70,7 +64,6 @@ public class TurretMachineGun : TurretBase
 
     public void AttackBotsInZone(AttackZone attackZone)
     {
-        // Gọi hàm tấn công cho các bot trong danh sách
         foreach (GameObject bot in attackZone.botsInRange)
         {
             AttackBot(bot);

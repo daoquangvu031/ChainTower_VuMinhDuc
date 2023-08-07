@@ -11,9 +11,10 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private float maxBuildDistance = 1f;
     [SerializeField] private List<TurretData> turretDatas;
 
-    public TurretData selectedTurretData;
 
     private bool isBuilding = false;
+    private int currentTurretCost = 0;
+    private TurretData selectedTurretData;
 
     private void Update()
     {
@@ -26,6 +27,7 @@ public class ShopManager : MonoBehaviour
     public void MachineGunTurret()
     {
         selectedTurretData = turretDatas.FirstOrDefault(data => data.TurrretType == TurrretType.MachineGun);
+        currentTurretCost = selectedTurretData.Coin;
         isBuilding = true;
 
     }
@@ -33,6 +35,7 @@ public class ShopManager : MonoBehaviour
     public void LaserTower()
     {
         selectedTurretData = turretDatas.FirstOrDefault(data => data.TurrretType == TurrretType.LaserTower);
+        currentTurretCost = selectedTurretData.Coin;
         isBuilding = true;
     }
 
@@ -57,7 +60,7 @@ public class ShopManager : MonoBehaviour
                 return;
             }
 
-            Collider[] colliders = Physics.OverlapSphere(buildPosition, 2f); // Đặt bán kính kiểm tra
+            Collider[] colliders = Physics.OverlapSphere(buildPosition, 2f); 
             foreach (var collider in colliders)
             {
                 if (collider.CompareTag("Turret"))
@@ -66,6 +69,24 @@ public class ShopManager : MonoBehaviour
                     isBuilding = false;
                     return;
                 }
+            }
+
+            int turretCost = selectedTurretData.Coin;
+
+            if (player.GetComponent<Player>().currentCoins >= turretCost)
+            {
+                GameObject currentTurretPrefab = selectedTurretData.Prefab.gameObject;
+                Instantiate(currentTurretPrefab, buildPosition, Quaternion.identity);
+
+                // Giảm số tiền của người chơi tương ứng
+                player.GetComponent<Player>().currentCoins -= turretCost;
+                player.GetComponent<Player>().UpdateCoinText();
+            }
+            else
+            {
+                Debug.Log("Không đủ tiền để xây trụ súng!");
+                isBuilding = false;
+                return;
             }
 
             GameObject turretPrefab = selectedTurretData.Prefab.gameObject;

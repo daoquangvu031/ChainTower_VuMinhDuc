@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 public class TurretBase: MonoBehaviour
 {
-
+    public BulletPool Pool;
     public AttackZone attackZone;
 
     private GameObject currentTarget;

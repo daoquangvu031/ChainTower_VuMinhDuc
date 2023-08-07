@@ -1,3 +1,4 @@
+using Core.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,9 @@ using UnityEngine;
 public class BulletPool : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public int poolSize = 10;
+    public int poolSize;
 
-    private List<GameObject> bulletPool;
+    private List<GameObject> bulletPool;    
 
     private void Start()
     {
@@ -38,4 +39,4 @@ public class BulletPool : MonoBehaviour
 
         return null;
     }
-}   
+}
