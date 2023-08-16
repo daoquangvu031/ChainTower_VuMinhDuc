@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net.Sockets;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class TurretRocket : TurretBase
 {
@@ -25,7 +26,9 @@ public class TurretRocket : TurretBase
             {
                 attackTimer -= Time.deltaTime;
             }
-            transform.LookAt(targetBot.transform.position);
+            Vector3 directionToTarget = targetBot.transform.position - transform.position;
+            Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
+            transform.rotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
         }
     }
 
@@ -64,4 +67,28 @@ public class TurretRocket : TurretBase
             AttackBot(bot);
         }
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag(Constant.TAG_TURRET))
+    //    {
+    //        TurretBase turret = other.GetComponent<TurretBase>();
+    //        if (turret != null)
+    //        {
+    //            AddTurretToZone(turret);
+    //        }
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag(Constant.TAG_TURRET))
+    //    {
+    //        TurretBase turret = other.GetComponent<TurretBase>();
+    //        if (turret != null)
+    //        {
+    //            RemoveTurretFromZone(turret);
+    //        }
+    //    }
+    //}
 }

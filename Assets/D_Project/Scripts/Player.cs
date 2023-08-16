@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TowerDefense.Towers;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,26 +11,33 @@ public class Player : MonoBehaviour
 
     public Text coin;
     public Rigidbody rb;
+    public int maxHealth;
     public Health health;
     public float moveSpeed;
+    public int currentCoins;
     public int currentHealth;
-    public int maxHealth = 100;
-    public int currentCoins = 0;
     public float attackCooldown;
+    public Vector3 initialPosition;
 
     private Vector3 input;
-    private bool canAttack = true;
+    private bool canAttack;
 
     public void Start()
     {
-        JoystickControl.EnableJoystick();
+        UIManager.Ins.OpenUI<UIMainMenu>();
+
+        JoystickControl.DisableJoystick();
 
         UpdateCoinText();
 
         StartCoroutine(AttackRoutine());
 
         currentHealth = maxHealth;
+
         health.SetMaxHealth(maxHealth);
+
+        initialPosition = transform.position;
+
     }
     public void Update()
     {
@@ -70,11 +78,20 @@ public class Player : MonoBehaviour
             ChangeAnim(Constant.ANIM_IDLE);
         }
     }
+    public void Reset()
+    {
+        health.SetMaxHealth(maxHealth);
+        currentHealth = 100;
+
+        currentCoins = 100;
+        UpdateCoinText();
+    }
 
     public void TakeDamage(int damege)
     {
         currentHealth -= damege;
         health.SetHealth(currentHealth);
+        CheckHealth();
     }
 
     public void ChangeAnim(string animName)
@@ -131,5 +148,49 @@ public class Player : MonoBehaviour
             other.GetComponent<Coin>().EatCoin();
             AddCoin(1);
         }
+        else if (other.CompareTag(Constant.TAG_WIN))
+        {
+            ShowVictoryCanvas();
+        }
+    }
+
+    public void CheckHealth()
+    {
+        if(currentHealth <= 0)
+        {
+            ShowDefeatCanvas();
+        }
+    }
+
+    public void ShowDefeatCanvas()
+    {
+        JoystickControl.DisableJoystick();
+
+        UIManager.Ins.OpenUI<UIDefeat>();
+
+        FindObjectOfType<BotManager>().RemoveAllBots();
+
+        foreach (var bot in FindObjectsOfType<Bot>())
+        {
+            Destroy(bot.gameObject);
+        }
+        UIDefeat.defeatCanvasDisplayed = true;
+
+    }
+
+    public void ShowVictoryCanvas()
+    {
+        FindObjectOfType<BotManager>().RemoveAllBots();
+        
+        foreach (var bot in FindObjectsOfType<Bot>())
+        {
+            Destroy(bot.gameObject);
+        }
+
+        JoystickControl.DisableJoystick();
+
+        UIManager.Ins.OpenUI<UIVictory>();
+
+        FindObjectOfType<SpawnBot>().SetVictoryDisplayed(true);
     }
 }

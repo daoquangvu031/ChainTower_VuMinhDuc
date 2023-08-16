@@ -5,7 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class TurretData : ScriptableObject
 {
-    public TurrretType TurrretType;
+    public TurretType TurretType;
 
     public Sprite Sprite;
 

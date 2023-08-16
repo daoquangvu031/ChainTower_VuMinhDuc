@@ -10,7 +10,7 @@ public class AttackZone : MonoBehaviour
 
     private void Update()
     {
-        botsInRange.RemoveAll(bot => bot.GetComponent<Bot>().isDead);
+        botsInRange.RemoveAll(bot => bot == null || bot.GetComponent<Bot>() == null || bot.GetComponent<Bot>().isDead);
 
         if (botsInRange.Count > 0)
         {

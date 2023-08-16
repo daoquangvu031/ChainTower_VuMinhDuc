@@ -10,6 +10,10 @@ TagManager:
   - Coin
   - Turret
   - BuildArea
+  - Missile
+  - Win
+  - Point
+  - Rocket
   layers:
   - Default
   - TransparentFX
@@ -23,7 +27,7 @@ TagManager:
   - Weapon
   - Laser
   - Turret
-  - 
+  - LayerLight
   - 
   - 
   - 

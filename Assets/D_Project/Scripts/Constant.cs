@@ -21,4 +21,8 @@ public class Constant
     public static string TAG_BOT = "Bot";
 
     public static string TAG_UNTAGGED = "Untagged";
+
+    public static string TAG_TURRET = "Turret";
+
+    public static string TAG_WIN = "Win";
 }

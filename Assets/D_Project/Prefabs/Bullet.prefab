@@ -100,7 +100,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   bulletSpeed: 70
-  bulletDamage: 10
+  bulletDamage: 40
 --- !u!54 &6211301644796954750
 Rigidbody:
   m_ObjectHideFlags: 0

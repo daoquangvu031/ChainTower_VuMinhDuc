@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TurrretType
+public enum TurretType
 {
     LaserTower = 0,
 

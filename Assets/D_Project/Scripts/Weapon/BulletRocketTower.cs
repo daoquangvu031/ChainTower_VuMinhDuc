@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TowerDefense.Game;
 using UnityEngine;
 
 public class BulletRocketTower : MonoBehaviour
@@ -8,9 +9,6 @@ public class BulletRocketTower : MonoBehaviour
     public int damageRocket;
 
     private Transform target;
-    private bool isFly = false;
-
-
     private void Update()
     {
         if (target == null || !target.gameObject.activeSelf)
@@ -23,14 +21,13 @@ public class BulletRocketTower : MonoBehaviour
 
         // Di chuyển đạn tới mục tiêu
         Vector3 direction = (target.position - transform.position).normalized;
-        transform.Translate((direction + Vector3.up) * speed * Time.deltaTime);
+        transform.Translate(direction * speed * Time.deltaTime, Space.World);
     }
 
     public void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(Constant.TAG_BOT))
         {
-            Debug.Log("1");
             Bot bot = other.GetComponent<Bot>();
             if (bot != null)
             {

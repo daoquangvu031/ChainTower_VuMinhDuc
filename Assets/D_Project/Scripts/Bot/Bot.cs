@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TowerDefense.Game;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -12,19 +13,26 @@ public class Bot : MonoBehaviour
     public string deadAnimParam = "IsDead";
     public string currentAnimName;
     public GameObject coinPrefab;   
-    public int maxHealth = 100;
-    public int botDamage = 5;
     public int currentHealth;
     public Transform target;
+    public ParticleSystem boomPraticleSystem;
+    public int maxHealth;
+    public int botDamage;
     public Health health;
     public Animator anim;
-
+    public bool isDead;
 
     private IState currentState;
-    public bool isDead;
 
     public void Start()
     {
+
+        BotManager botManager = FindObjectOfType<BotManager>();
+        if (botManager != null)
+        {
+            botManager.AddBot(this);
+        }
+
         GameObject player = GameObject.FindGameObjectWithTag("Character");
         if (player != null)
         {
@@ -53,7 +61,7 @@ public class Bot : MonoBehaviour
 
     private IEnumerator DieCoroutine()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         BotPool botPool = FindObjectOfType<BotPool>();
         
@@ -68,13 +76,22 @@ public class Bot : MonoBehaviour
         GetComponent<Collider>().enabled = false;
     }
 
-    private void Die()
+    public void DisableAgent()
+    {
+        agent.isStopped = true;
+    }
+
+    public void Die()
     {
         if (isDead) return;
+
+        TriggerBoomEffect();
 
         anim.SetBool(deadAnimParam, true); // Set animation param "isDead" to true
 
         isDead = true;
+
+        DisableAgent();
 
         gameObject.tag = Constant.TAG_UNTAGGED;
 
@@ -84,8 +101,19 @@ public class Bot : MonoBehaviour
 
         StartCoroutine(DieCoroutine());
     }
+    private void TriggerBoomEffect()
+    {
+        if (boomPraticleSystem != null)
+        {
+            boomPraticleSystem.gameObject.SetActive(true);
 
-    public void TakeDamage(int damage)
+            boomPraticleSystem.transform.position = transform.position;
+            
+            boomPraticleSystem.Play();
+        }
+    }
+
+        public void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
@@ -115,14 +143,14 @@ public class Bot : MonoBehaviour
         agent.isStopped = true;
     }
 
-    public void ChangeState(IState newState)
-    {
-        currentState?.OnExit(this);
+    //public void ChangeState(IState newState)
+    //{
+    //    currentState?.OnExit(this);
 
-        currentState = newState;
+    //    currentState = newState;
 
-        currentState?.OnEnter(this);
-    }
+    //    currentState?.OnEnter(this);
+    //}
 
     public void ChangeAnim(string animName)
     {

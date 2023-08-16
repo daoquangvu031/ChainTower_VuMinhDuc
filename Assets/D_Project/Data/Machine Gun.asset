@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a9835e1fd5f3548bccbf34f85c1c6a, type: 3}
   m_Name: Machine Gun
   m_EditorClassIdentifier: 
-  TurrretType: 2
+  TurretType: 2
   Sprite: {fileID: 21300000, guid: dd0ae16cd2d6ced449affe3ba6786f79, type: 3}
   Prefab: {fileID: 608493652, guid: 259381dde7be7cb458c7d6e508db5596, type: 3}
   Coin: 10

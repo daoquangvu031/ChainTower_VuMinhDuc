@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class TurretLaser : TurretBase
 {
@@ -35,7 +36,9 @@ public class TurretLaser : TurretBase
             ParticleSystem particleSystem = currentLaser.GetComponent<ParticleSystem>();
             particleSystem.Play();
 
-            transform.LookAt(bot.transform.position);
+            Vector3 directionToTarget = bot.transform.position - transform.position;
+            Quaternion lookRotation = Quaternion.LookRotation(directionToTarget);
+            transform.rotation = Quaternion.Euler(0, lookRotation.eulerAngles.y, 0);
 
 
             if (Physics.Raycast(bulletSpawnPoint.position, bot.transform.position - bulletSpawnPoint.position + Vector3.up, out RaycastHit hit, float.PositiveInfinity, botLayerMask))
@@ -84,7 +87,30 @@ public class TurretLaser : TurretBase
                 Destroy(currentLaser, particleSystem.main.duration);
             }
         }
-            
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag(Constant.TAG_TURRET))
+    //    {
+    //        TurretBase turret = other.GetComponent<TurretBase>();
+    //        if (turret != null)
+    //        {
+    //            AddTurretToZone(turret);
+    //        }
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag(Constant.TAG_TURRET))
+    //    {
+    //        TurretBase turret = other.GetComponent<TurretBase>();
+    //        if (turret != null)
+    //        {
+    //            RemoveTurretFromZone(turret);
+    //        }
+    //    }
+    //}
 }
 

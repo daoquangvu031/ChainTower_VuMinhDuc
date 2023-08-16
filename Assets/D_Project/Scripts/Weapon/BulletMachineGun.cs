@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TowerDefense.Game;
 using UnityEngine;
 
 public class BulletMachineGun : MonoBehaviour

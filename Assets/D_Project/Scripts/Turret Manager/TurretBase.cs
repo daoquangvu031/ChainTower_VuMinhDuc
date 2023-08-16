@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 public class TurretBase: MonoBehaviour
 {
-    public BulletPool Pool;
     public AttackZone attackZone;
+    public BulletPool Pool;
 
     private GameObject currentTarget;
-    
-    
+
+
+
     public virtual void SetTargetBot(GameObject bot)
     {
         if (currentTarget != bot)

@@ -20,7 +20,7 @@ public class TurretMachineGun : TurretBase
         {
             if (attackTimer <= 0)
             {
-                AttackBot(targetBot);   
+                AttackBots(targetBot);   
                 attackTimer = attackInterval;
             }
             else
@@ -31,7 +31,7 @@ public class TurretMachineGun : TurretBase
         }
 
     }
-    public void AttackBot(GameObject bot)
+    public void AttackBots(GameObject bot)
     {
         if (bot != null && targetBot != null) // Kiểm tra cả bot và targetBot có khác null
         {
@@ -66,7 +66,31 @@ public class TurretMachineGun : TurretBase
     {
         foreach (GameObject bot in attackZone.botsInRange)
         {
-            AttackBot(bot);
+            AttackBots(bot);
         }
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag(Constant.TAG_TURRET))
+    //    {
+    //        TurretBase turret = other.GetComponent<TurretBase>();
+    //        if (turret != null)
+    //        {
+    //            AddTurretToZone(turret);
+    //        }
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.CompareTag(Constant.TAG_TURRET))
+    //    {
+    //        TurretBase turret = other.GetComponent<TurretBase>();
+    //        if (turret != null)
+    //        {
+    //            RemoveTurretFromZone(turret);
+    //        }
+    //    }
+    //}
 }
