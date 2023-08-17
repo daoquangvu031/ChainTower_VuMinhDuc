@@ -12,7 +12,7 @@ public class Bot : MonoBehaviour
 
     public string deadAnimParam = "IsDead";
     public string currentAnimName;
-    public GameObject coinPrefab;   
+    public GameObject coinPrefab;
     public int currentHealth;
     public Transform target;
     public ParticleSystem boomPraticleSystem;
@@ -64,7 +64,7 @@ public class Bot : MonoBehaviour
         yield return new WaitForSeconds(3f);
 
         BotPool botPool = FindObjectOfType<BotPool>();
-        
+
         if (botPool != null)
         {
             botPool.ReturnToPool(gameObject);
@@ -108,12 +108,12 @@ public class Bot : MonoBehaviour
             boomPraticleSystem.gameObject.SetActive(true);
 
             boomPraticleSystem.transform.position = transform.position;
-            
+
             boomPraticleSystem.Play();
         }
     }
 
-        public void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         currentHealth -= damage;
 
@@ -125,7 +125,7 @@ public class Bot : MonoBehaviour
         if (other.CompareTag(Constant.TAG_CHARACTER))
         {
             Player player = other.GetComponent<Player>();
-            if(player != null)
+            if (player != null)
             {
                 player.TakeDamage(botDamage);
             }

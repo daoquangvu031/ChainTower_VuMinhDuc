@@ -3,15 +3,14 @@ using System.Collections.Generic;
 using TowerDefense.Game;
 using UnityEngine;
 
-public class BulletMachineGun : MonoBehaviour
+public class BulletMachineGun : BulletBase
 {
+    Vector3 targetPosition;
     public Transform target;
     public float bulletSpeed;
-    public int bulletDamage = 20;
-    Vector3 targetPosition;
 
 
-    private bool isFired = false; // Xác định xem viên đạn đã được bắn ra hay chưa
+    private bool isFired;
     private Vector3 startPosition;
 
 
@@ -60,24 +59,12 @@ public class BulletMachineGun : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // Kiểm tra nếu va chạm với bot hoặc trứng bot
         if (other.CompareTag(Constant.TAG_BOT))
         {
             Bot bot = other.GetComponent<Bot>();
             if (bot != null)
             {
-                bot.TakeDamage(bulletDamage); // Gây sát thương cho bot
-            }
-
-            gameObject.SetActive(false);
-            isFired = false;
-        }
-        else if (other.CompareTag(Constant.TAG_BOT))
-        {
-            Bot bot = other.GetComponent<Bot>();
-            if (bot != null)
-            {
-                bot.TakeDamage(bulletDamage); // Gây sát thương cho trứng bot
+                bot.TakeDamage(baseDamage);
             }
 
             gameObject.SetActive(false);

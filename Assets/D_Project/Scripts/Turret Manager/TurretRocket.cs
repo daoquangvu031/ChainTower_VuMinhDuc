@@ -44,11 +44,12 @@ public class TurretRocket : TurretBase
                     rocket.transform.position = rocketSpawnPoint.position;
                     rocket.SetActive(true);
 
-                    BulletRocketTower rocketComponent = rocket.GetComponent<BulletRocketTower>();
-                    if (rocketComponent != null)
+                    BulletRocketTower bulletRocket = rocket.GetComponent<BulletRocketTower>();
+                    if (bulletRocket != null)
                     {
-                        // Thiết lập thông số cho rocket, chẳng hạn như hướng bay và mục tiêu
-                        rocketComponent.SetTarget(targetBot.transform);
+                        bulletRocket.SetTarget(targetBot.transform);
+                        bulletRocket.baseDamage += addMoreDamage;
+
                     }
                 }
             }
@@ -68,27 +69,4 @@ public class TurretRocket : TurretBase
         }
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag(Constant.TAG_TURRET))
-    //    {
-    //        TurretBase turret = other.GetComponent<TurretBase>();
-    //        if (turret != null)
-    //        {
-    //            AddTurretToZone(turret);
-    //        }
-    //    }
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.CompareTag(Constant.TAG_TURRET))
-    //    {
-    //        TurretBase turret = other.GetComponent<TurretBase>();
-    //        if (turret != null)
-    //        {
-    //            RemoveTurretFromZone(turret);
-    //        }
-    //    }
-    //}
 }

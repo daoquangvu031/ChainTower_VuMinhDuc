@@ -7,14 +7,14 @@ public class TurretLaser : TurretBase
 {
     [SerializeField] LayerMask botLayerMask;
 
-    public int damage = 20;
+    public int damage;
     public GameObject laserPrefab;
     public Transform bulletSpawnPoint;
 
     private GameObject currentLaser;
     private bool isDamaging = false;
     private float damageCooldownTimer = 0f;
-    private float damageCooldownDuration = 0.5f;
+    private float damageCooldownDuration = 1.5f;
 
 
     public override void SetTargetBot(GameObject bot)
@@ -49,7 +49,6 @@ public class TurretLaser : TurretBase
                 {
                     if (!isDamaging)
                     {
-                        // Bắt đầu đếm ngược trước khi trừ máu
                         isDamaging = true;
                         damageCooldownTimer = damageCooldownDuration;
                     }
@@ -65,7 +64,7 @@ public class TurretLaser : TurretBase
                     Bot botComponent = hit.collider.GetComponent<Bot>();
                     if (botComponent != null)
                     {
-                        botComponent.TakeDamage(damage);
+                        botComponent.TakeDamage(damage + addMoreDamage);
                     }
 
                     isDamaging = false;
@@ -88,29 +87,5 @@ public class TurretLaser : TurretBase
             }
         }
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag(Constant.TAG_TURRET))
-    //    {
-    //        TurretBase turret = other.GetComponent<TurretBase>();
-    //        if (turret != null)
-    //        {
-    //            AddTurretToZone(turret);
-    //        }
-    //    }
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.CompareTag(Constant.TAG_TURRET))
-    //    {
-    //        TurretBase turret = other.GetComponent<TurretBase>();
-    //        if (turret != null)
-    //        {
-    //            RemoveTurretFromZone(turret);
-    //        }
-    //    }
-    //}
 }
 

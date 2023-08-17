@@ -193,8 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b679c3c2e5b6141ac71a6667cf30f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseDamage: 50
   speed: 55
-  damageRocket: 80
 --- !u!1 &1827127167504934
 GameObject:
   m_ObjectHideFlags: 0

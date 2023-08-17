@@ -5,6 +5,7 @@ public class TurretBase: MonoBehaviour
 {
     public AttackZone attackZone;
     public BulletPool Pool;
+    public int addMoreDamage;
 
     private GameObject currentTarget;
 
@@ -17,4 +18,5 @@ public class TurretBase: MonoBehaviour
             currentTarget = bot;
         }
     }
+ 
 }

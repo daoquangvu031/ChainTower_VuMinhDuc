@@ -83,6 +83,7 @@ public class BotPool : MonoBehaviour
             {
                 {
                     botComponent.isDead = false;
+                    botComponent.boomPraticleSystem.gameObject.SetActive(false);
                     botComponent.gameObject.tag = Constant.TAG_BOT;
                     botComponent.anim.SetBool(botComponent.deadAnimParam, false);
                     botComponent.currentHealth = botComponent.maxHealth;

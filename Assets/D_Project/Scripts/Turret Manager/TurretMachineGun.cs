@@ -20,7 +20,7 @@ public class TurretMachineGun : TurretBase
         {
             if (attackTimer <= 0)
             {
-                AttackBots(targetBot);   
+                AttackBots(targetBot);
                 attackTimer = attackInterval;
             }
             else
@@ -35,7 +35,7 @@ public class TurretMachineGun : TurretBase
     {
         if (bot != null && targetBot != null) // Kiểm tra cả bot và targetBot có khác null
         {
-            
+
             swordParticleSystem.Play();
 
             if (bulletPrefab != null && bulletSpawnPoint != null)
@@ -51,6 +51,8 @@ public class TurretMachineGun : TurretBase
                     {
                         Vector3 direction = (bot.transform.position - bulletSpawnPoint.position).normalized;
                         bulletMachineGun.SetDirection(targetBot.transform);
+
+                        bulletMachineGun.baseDamage += addMoreDamage;
                     }
                 }
             }
@@ -61,36 +63,4 @@ public class TurretMachineGun : TurretBase
     {
         targetBot = bot;
     }
-
-    public void AttackBotsInZone(AttackZone attackZone)
-    {
-        foreach (GameObject bot in attackZone.botsInRange)
-        {
-            AttackBots(bot);
-        }
-    }
-
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag(Constant.TAG_TURRET))
-    //    {
-    //        TurretBase turret = other.GetComponent<TurretBase>();
-    //        if (turret != null)
-    //        {
-    //            AddTurretToZone(turret);
-    //        }
-    //    }
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.CompareTag(Constant.TAG_TURRET))
-    //    {
-    //        TurretBase turret = other.GetComponent<TurretBase>();
-    //        if (turret != null)
-    //        {
-    //            RemoveTurretFromZone(turret);
-    //        }
-    //    }
-    //}
 }

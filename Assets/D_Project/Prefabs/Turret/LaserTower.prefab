@@ -4778,6 +4778,7 @@ GameObject:
   - component: {fileID: 4123545054233330}
   - component: {fileID: 5955566036861796321}
   - component: {fileID: -4528266339944505242}
+  - component: {fileID: -8135859968168308269}
   m_Layer: 0
   m_Name: LaserTower
   m_TagString: Turret
@@ -4819,10 +4820,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackZone: {fileID: 7649049060442141032}
   Pool: {fileID: 0}
+  addMoreDamage: 0
   botLayerMask:
     serializedVersion: 2
     m_Bits: 64
-  damage: 45
+  damage: 35
   laserPrefab: {fileID: 1509373824674542}
   bulletSpawnPoint: {fileID: 4820288120695166}
 --- !u!65 &-4528266339944505242
@@ -4838,6 +4840,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1.532295, z: 1.9994978}
   m_Center: {x: 0, y: 0.730776, z: 0.038407486}
+--- !u!54 &-8135859968168308269
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1161251386251526}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1 &1213524718981924
 GameObject:
   m_ObjectHideFlags: 0
@@ -38935,6 +38953,7 @@ GameObject:
   - component: {fileID: 4934394889621575456}
   - component: {fileID: 2698706220689932920}
   - component: {fileID: 7649049060442141032}
+  - component: {fileID: 2521954714482861593}
   m_Layer: 0
   m_Name: Sensor
   m_TagString: Untagged
@@ -38984,6 +39003,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   botsInRange: []
   turret: {fileID: 5955566036861796321}
+--- !u!114 &2521954714482861593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1693689882957922091}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94a29feee956cbb4fb640f2b1dcf662e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turretsInRange: []
 --- !u!1 &1703366389170017130
 GameObject:
   m_ObjectHideFlags: 0
@@ -39042,7 +39074,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5634111737649922176}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.05, z: -0}
+  m_LocalPosition: {x: 0, y: 0.13, z: -0}
   m_LocalScale: {x: 4.5, y: 4.5, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -98,9 +98,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a161488bd4309540a33bfe1571f68db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseDamage: 10
   target: {fileID: 0}
   bulletSpeed: 70
-  bulletDamage: 40
 --- !u!54 &6211301644796954750
 Rigidbody:
   m_ObjectHideFlags: 0

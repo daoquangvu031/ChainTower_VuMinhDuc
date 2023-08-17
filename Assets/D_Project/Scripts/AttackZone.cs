@@ -7,14 +7,13 @@ public class AttackZone : MonoBehaviour
     public List<GameObject> botsInRange = new List<GameObject>();
     public TurretBase turret;
 
-
     private void Update()
     {
         botsInRange.RemoveAll(bot => bot == null || bot.GetComponent<Bot>() == null || bot.GetComponent<Bot>().isDead);
 
         if (botsInRange.Count > 0)
         {
-            GameObject targetBot = GetNearestBot(); 
+            GameObject targetBot = GetNearestBot();
             turret.SetTargetBot(targetBot);
         }
         else
@@ -39,12 +38,10 @@ public class AttackZone : MonoBehaviour
         return nearestBot;
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag(Constant.TAG_BOT))
         {
-            // Nếu bot vào vùng tấn công và chưa có trong danh sách, thêm vào danh sách
             if (!botsInRange.Contains(other.gameObject))
             {
                 botsInRange.Add(other.gameObject);
@@ -56,7 +53,6 @@ public class AttackZone : MonoBehaviour
     {
         if (other.CompareTag(Constant.TAG_BOT))
         {
-            // Nếu bot rời khỏi vùng tấn công, xóa khỏi danh sách
             if (botsInRange.Contains(other.gameObject))
             {
                 botsInRange.Remove(other.gameObject);
