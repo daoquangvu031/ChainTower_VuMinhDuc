@@ -5,6 +5,10 @@ using UnityEngine;
 public class AttackZoneDamage : MonoBehaviour
 {
     public List<TurretBase> turretsInRange = new List<TurretBase>();
+    public ParticleSystem upParticleSystem;
+
+    private bool isEffectRunning = false;
+
 
 
     private void OnTriggerEnter(Collider other)
@@ -15,10 +19,47 @@ public class AttackZoneDamage : MonoBehaviour
             if (turretBase != null)
             {
                 AddTurretInRange(turretBase);
+
+                if (!isEffectRunning)
+                {
+                    //StartCoroutine(ShowEffectCoroutine());
+                    ShowEffect();
+                }
             }
         }
     }
 
+    //private IEnumerator ShowEffectCoroutine()
+    //{
+    //    while (true)
+    //    {
+    //        ResetEffect();
+    //        ShowEffect();
+    //        yield return new WaitForSeconds(1f);
+    //    }
+    //}
+
+    //private void ResetEffect()
+    //{
+    //    if (upParticleSystem != null)
+    //    {
+    //        upParticleSystem.Stop();
+    //        upParticleSystem.Clear();
+    //        upParticleSystem.gameObject.SetActive(false);
+    //    }
+    //}
+
+    private void ShowEffect()
+    {
+        if (upParticleSystem != null)
+        {
+            if (!upParticleSystem.isPlaying)
+            {
+                upParticleSystem.gameObject.SetActive(true);
+                upParticleSystem.Play();
+            }
+        }
+    }
 
     public void AddTurretInRange(TurretBase turret)
     {
@@ -34,7 +75,7 @@ public class AttackZoneDamage : MonoBehaviour
             {
                 turret.addMoreDamage = 5;
             }
-            else if(turret is TurretRocket)
+            else if (turret is TurretRocket)
             {
                 turret.addMoreDamage = 11;
             }
